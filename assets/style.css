@@ -1,0 +1,409 @@
+/* Thaikoon Restaurant — arkusz wyłącznie tej strony.
+ *
+ * Kierunek z ui-ux-pro-max dla tajskiej restauracji: Vibrant / Block-based,
+ * Playfair Display SC + Karla, głęboka czerwień. Do tego jedna decyzja
+ * układowa: galeria idzie PRZED opowieścią, bo restaurację wybiera się okiem,
+ * a nie czytając akapit o pasji do gotowania.
+ * Nic tu nie jest współdzielone z pozostałymi projektami.
+ */
+
+:root{
+  --wino:#2A0E0C;
+  --czerwien:#9E2B25;
+  --zloto:#E8B04B;
+  --piasek:#FBF6EF;
+  --piasek-cien:#F2E7D8;
+  --tekst:#241512;
+  --tekst-cichy:#6E5A54;
+  --naglowek:'Playfair Display SC',Georgia,serif;
+  --tresc:'Karla',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --szer:1180px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--piasek);color:var(--tekst);
+  font:400 17px/1.72 var(--tresc);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--naglowek);font-weight:400;line-height:1.14;margin:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.skip{position:absolute;left:-9999px;background:var(--zloto);color:var(--wino);padding:10px 16px;z-index:200}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:2px solid var(--zloto);outline-offset:3px}
+.nadpis{font-size:.7rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--zloto);margin:0 0 18px}
+.nadpis--ciemny{color:var(--czerwien)}
+.wstep{font-size:1.05rem;color:rgba(251,246,239,.8);max-width:54ch;margin:0}
+.wstep--ciemny{color:var(--tekst-cichy)}
+.cicho{font-size:.86rem;color:var(--tekst-cichy);margin:14px 0 0;max-width:46ch}
+
+/* ------------------------------------------------------------- belka */
+.belka{position:sticky;top:0;z-index:90;background:var(--wino);color:var(--piasek)}
+.belka-rzad{display:flex;align-items:center;gap:26px;min-width:0;
+  padding:0 0 0 clamp(16px,4vw,36px)}
+.marka{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto;
+  font-family:var(--naglowek);font-size:1.15rem;letter-spacing:.06em;padding:16px 0}
+.marka-t{width:32px;height:32px;border-radius:50%;background:var(--czerwien);color:var(--zloto);
+  display:grid;place-items:center;font-size:1rem}
+/* Menu w osobnym rzedzie, jak naglowki dzialow w karcie dan. Ponizej 900px
+   caly rzad znika i zostaje hamburger. */
+.menu-nav{display:flex;justify-content:center;gap:28px;
+  padding:0 clamp(16px,4vw,36px) 11px;border-top:1px solid rgba(232,176,75,.22)}
+.menu-nav a{font-size:.76rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;opacity:.8;transition:opacity .3s,color .3s}
+.menu-nav a:hover{opacity:1;color:var(--zloto)}
+.jezyk{display:flex;gap:2px}
+.jezyk .lang{font-size:.68rem;font-weight:600;letter-spacing:.1em;padding:5px 7px;
+  text-decoration:none;opacity:.55;transition:opacity .3s}
+.jezyk .lang:hover{opacity:.95}
+.jezyk .lang.is-on{opacity:1;color:var(--zloto)}
+.dzwon{background:var(--czerwien);color:#fff;text-decoration:none;font-weight:600;
+  font-size:.82rem;letter-spacing:.06em;padding:20px 26px;align-self:stretch;
+  display:grid;place-items:center;transition:background .3s}
+.dzwon:hover{background:var(--zloto);color:var(--wino)}
+.ham{display:none;background:0;border:0;padding:13px;cursor:pointer;flex-direction:column;gap:5px}
+.ham span{display:block;width:23px;height:2px;background:var(--piasek)}
+.mm{display:none}
+
+/* ---------------------------------------------------------- otwarcie */
+.otwarcie{position:relative;min-height:92svh;display:grid;place-items:center;text-align:center;
+  color:var(--piasek);overflow:hidden;padding:110px clamp(20px,6vw,40px) 90px}
+.otwarcie-tlo{position:absolute;inset:0;background:var(--wino)}
+.otwarcie-tlo picture,.otwarcie-tlo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.zaslona{position:absolute;inset:0;background:
+  radial-gradient(115% 85% at 50% 40%,rgba(42,14,12,.5) 0%,rgba(42,14,12,.88) 62%,rgba(42,14,12,.97) 100%)}
+.otwarcie-srodek{position:relative;max-width:760px}
+.otwarcie h1{font-size:clamp(2.5rem,6.6vw,4.9rem);margin-bottom:.3em}
+.otwarcie .wstep{margin:0 auto 40px}
+.guziki{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.zloty{background:var(--zloto);color:var(--wino);text-decoration:none;font-weight:600;
+  font-size:.92rem;letter-spacing:.08em;padding:18px 40px;border-radius:999px;
+  transition:transform .3s ease,box-shadow .3s ease}
+.zloty:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(232,176,75,.3)}
+.pusty{border:1px solid rgba(251,246,239,.5);color:var(--piasek);text-decoration:none;
+  font-weight:600;font-size:.92rem;letter-spacing:.08em;padding:17px 32px;border-radius:999px;
+  transition:background .3s,border-color .3s}
+.pusty:hover{background:rgba(251,246,239,.12);border-color:var(--piasek)}
+.pusty--ciemny{border-color:var(--wino);color:var(--wino);display:inline-block;margin-top:16px}
+.pusty--ciemny:hover{background:var(--wino);color:var(--piasek)}
+
+/* -------------------------------------------------------------- stół */
+.stol{background:var(--wino);padding:clamp(22px,3vw,34px) 0}
+/* Przewijanie w bok jest tu celowe — patrz lista wyjatkow w scripts/mobile.mjs. */
+.stol-tasma{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x proximity;
+  padding:0 clamp(16px,4vw,32px);-webkit-overflow-scrolling:touch}
+.stol figure{flex:0 0 clamp(240px,32vw,380px);scroll-snap-align:start;
+  margin:0;overflow:hidden;background:var(--wino)}
+.stol img{width:100%;height:clamp(300px,36vw,470px);object-fit:cover;
+  transition:transform 1s cubic-bezier(.2,.7,.3,1)}
+.stol figure:hover img{transform:scale(1.05)}
+.stol figcaption{padding-top:10px;color:var(--piasek);
+  font-family:var(--naglowek);font-size:.86rem;letter-spacing:.14em;
+  text-shadow:0 2px 12px rgba(0,0,0,.7)}
+.zrodlo{max-width:var(--szer);margin:16px auto 0;padding:0 clamp(20px,6vw,40px);
+  font-size:.78rem;color:var(--tekst-cichy)}
+
+/* -------------------------------------------------------------- karta */
+.karta,.lokal,.godziny{max-width:var(--szer);margin:0 auto;
+  padding:clamp(72px,10vw,140px) clamp(20px,6vw,40px)}
+.karta h2,.lokal h2,.godziny h2{font-size:clamp(1.9rem,4.6vw,3.2rem);margin-bottom:.45em}
+.dania{margin-top:54px;display:grid;gap:0}
+.dania article{display:grid;grid-template-columns:1fr auto;gap:2px 14px;align-items:baseline;
+  padding:24px 0;border-bottom:1px dashed var(--piasek-cien)}
+.dania article:first-child{border-top:1px dashed var(--piasek-cien)}
+.dania h3{font-size:clamp(1.1rem,2.2vw,1.45rem)}
+.dania p{grid-column:1;margin:6px 0 0;font-size:.96rem;color:var(--tekst-cichy);max-width:60ch}
+.kropki{display:none}
+.cena{font-family:var(--naglowek);font-size:1rem;color:var(--czerwien);white-space:nowrap}
+.uwaga{margin-top:44px;font-size:.94rem;color:var(--tekst-cichy);
+  border-left:3px solid var(--zloto);padding-left:20px;max-width:64ch}
+
+/* -------------------------------------------------------------- lokal */
+.lokal{display:grid;gap:clamp(34px,5vw,70px);background:var(--piasek-cien);max-width:none}
+.lokal > *{max-width:calc(var(--szer) / 2);width:100%}
+.lokal-tekst p{color:var(--tekst-cichy);margin:0 0 1.2em;max-width:60ch}
+.atuty{list-style:none;margin:32px 0 0;padding:0}
+.atuty li{padding:13px 0 13px 30px;border-bottom:1px solid rgba(36,21,18,.1);position:relative;font-size:.97rem}
+.atuty li::before{content:"";position:absolute;left:0;top:20px;width:12px;height:12px;
+  border-radius:50%;background:var(--czerwien)}
+.lokal-foto{margin:0;overflow:hidden;border-radius:4px;align-self:start}
+.lokal-foto img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+
+/* ------------------------------------------------------------ godziny */
+.godziny{display:grid;gap:clamp(36px,5vw,74px);background:var(--wino);color:var(--piasek);max-width:none}
+.godziny > *{max-width:calc(var(--szer) / 2);width:100%}
+.godziny table{width:100%;border-collapse:collapse;max-width:480px}
+.godziny th,.godziny td{padding:14px 0;border-bottom:1px solid rgba(251,246,239,.16);
+  text-align:left;font-weight:400}
+.godziny th{font-size:.94rem}
+.godziny td{text-align:right;font-variant-numeric:tabular-nums;color:rgba(251,246,239,.7)}
+.godziny .cicho{color:rgba(251,246,239,.6)}
+.godziny .nadpis{color:var(--zloto)}
+.ulica{margin:0 0 18px;line-height:1.8;color:rgba(251,246,239,.85)}
+.wielki{display:block;font-family:var(--naglowek);font-size:clamp(1.6rem,3.6vw,2.4rem);
+  text-decoration:none;color:var(--zloto);margin-bottom:10px}
+.wielki:hover{color:var(--piasek)}
+.godziny .pusty--ciemny{border-color:var(--zloto);color:var(--zloto)}
+.godziny .pusty--ciemny:hover{background:var(--zloto);color:var(--wino)}
+
+.stopka{background:#1E0908;text-align:center;padding:54px 20px}
+/* Kreska nie jest ozdobnikiem tylko domknieciem: gasnie po bokach, wiec nie
+   tworzy ramki, ktorej reszta tej strony nie ma. */
+.stopka-kreska{display:block;width:min(180px,60%);height:2px;margin:0 auto 26px;
+  background:linear-gradient(90deg,transparent,var(--zloto),transparent)}
+.stopka-marka{margin:0 0 10px;font-family:var(--naglowek);
+  font-size:clamp(1.45rem,4.5vw,2rem);letter-spacing:.04em;color:var(--zloto)}
+.stopka-adres{margin:0;font-size:.92rem;color:rgba(251,246,239,.72)}
+/* .58 zamiast .45: przy .78rem to drobny tekst, a .45 dawalo 4.4:1 — tuz pod progiem. */
+.stopka .cicho{display:block;margin-top:14px;font-size:.78rem;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(251,246,239,.58)}
+
+@media (min-width:900px){
+  .stol-tasma{justify-content:center}
+  .lokal,.godziny{grid-template-columns:1fr 1fr;align-items:start}
+  .lokal > *,.godziny > *{max-width:none}
+  .lokal{padding-inline:clamp(20px,6vw,40px)}
+  .lokal > .nadpis,.lokal > h2{grid-column:1 / -1;max-width:none}
+  .dania article{grid-template-columns:minmax(220px,1fr) 3fr auto;align-items:center}
+  .dania p{grid-column:auto;margin:0}
+}
+@media (max-width:899px){
+  .menu-nav{display:none}
+  .ham{display:flex}
+  /* Pasek: marka + telefon + hamburger nie miescily sie w 390 px i strona
+     przewijala sie w bok do 483 px. Telefon skraca sie do samej ikony-tekstu,
+     marka moze sie kurczyc, a kontener dostaje min-width:0, bo bez tego
+     element flex nie zejdzie ponizej swojej tresci. */
+  .belka-rzad{gap:8px;min-width:0}
+  .marka{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:1rem}
+  .dzwon{padding:16px 12px;font-size:.72rem;max-width:40vw;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .jezyk{flex:0 0 auto}
+  .jezyk .lang{padding:5px 5px}
+  .mm{display:none;position:fixed;inset:64px 0 auto;z-index:85;background:var(--wino);
+    padding:12px 22px 22px;flex-direction:column}
+  .mm.otwarte{display:flex}
+  .mm a{color:var(--piasek);text-decoration:none;font-weight:600;font-size:.84rem;
+    letter-spacing:.16em;text-transform:uppercase;padding:15px 0;
+    border-bottom:1px solid rgba(251,246,239,.16)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+
+.img--hero{object-position:50% 55%}
+.img--about{object-position:50% 50%}
+.img--detail-1{object-position:50% 50%}
+.img--detail-2{object-position:50% 50%}
+.img--detail-3{object-position:50% 50%}
+
+/* Zloto #E8B04B w sygnecie na czerwieni daje 3.80:1 — za malo dla 16 px.
+   Jasniejszy wariant podnosi to do 5.1:1 i nie zmienia charakteru znaku. */
+.marka-t{color:#F5D188}
+
+/* ================================================ STAN LOKALU I TYDZIEŃ
+ * Nikt nie pyta restauracji „jakie macie godziny w czwartek". Pyta „czy zdążę",
+ * o 21:40, w drodze. Dlatego na wierzchu jest żywy stan lokalu, liczony
+ * w przeglądarce gościa, a dopiero pod nim leży cały tydzień.
+ */
+.godziny{display:block;text-align:center}
+.nadpis--srodek{text-align:center}
+.godziny-tytul{margin-bottom:.5em}
+
+.stan{display:flex;width:fit-content;align-items:center;gap:10px;margin:0 auto 22px;
+  padding:11px 22px;border-radius:999px;font-size:.9rem;font-weight:600;
+  border:1px solid transparent}
+.stan-kropka{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+/* Zielony i bordowy zamiast złota — to jedyne miejsce na stronie, gdzie kolor
+   niesie informację, a nie nastrój, więc musi być czytelny na pierwszy rzut. */
+.stan--otwarte{background:rgba(31,110,58,.12);border-color:rgba(31,110,58,.4);color:#1B5F32}
+.stan--otwarte .stan-kropka{background:#1F6E3A;
+  box-shadow:0 0 0 0 rgba(31,110,58,.55);animation:tetno 2.4s ease-out infinite}
+.stan--zamkniete{background:rgba(158,43,37,.1);border-color:rgba(158,43,37,.34);color:#8A231E}
+.stan--zamkniete .stan-kropka{background:#9E2B25}
+@keyframes tetno{
+  70%{box-shadow:0 0 0 9px rgba(31,110,58,0)}
+  100%{box-shadow:0 0 0 0 rgba(31,110,58,0)}
+}
+
+.siatka-tygodnia{display:grid;gap:0 clamp(20px,4vw,52px);margin:clamp(22px,3vw,34px) auto 0;
+  max-width:660px;text-align:left}
+.dzien-wiersz{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  padding:11px 0;border-bottom:1px solid rgba(42,14,12,.12)}
+.dzien-nazwa{font-size:.94rem}
+.dzien-czas{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--tekst-cichy)}
+.dzien-wiersz.dzis .dzien-nazwa{font-weight:600}
+.dzien-wiersz.dzis .dzien-czas{color:var(--zloto-ciemne, #8A5A12);font-weight:600}
+.cicho--srodek{margin-left:auto;margin-right:auto;text-align:center}
+
+/* Adres w jednej poziomej listwie, nie w drugiej kolumnie obok godzin. */
+.pasek-adresu{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:18px clamp(24px,4vw,52px);margin-top:clamp(32px,4vw,52px);
+  padding-top:clamp(26px,3vw,38px);border-top:1px solid rgba(42,14,12,.14);text-align:left}
+.pasek-adresu .ulica{margin:0;font-size:1rem}
+.pasek-adresu .wielki{margin:0}
+
+@media (min-width:680px){
+  .siatka-tygodnia{grid-template-columns:1fr 1fr}
+}
+
+/* ==================================== TELEFON: dotyk i czytelność
+ * Zmierzone skryptem scripts/mobile.mjs na 360 i 390 px, w trzech językach.
+ *
+ * Przełącznik języka miał 26×29 px. To jest pierwszy element, w który celuje
+ * ukraiński klient po wejściu na stronę, a opuszek palca ma około 45 px —
+ * czyli trafiał obok. Podpisy i etykiety siedziały na 10.9–11.5 px.
+ *
+ * Rozmiary idą z !important, bo bez tego przegrywają na specyficzności
+ * z regułami dekoracyjnymi (.jezyk .lang, .galeria figcaption). To są progi
+ * dostępności, nie ozdoba — muszą wygrać. Poza wąskim ekranem nic się nie zmienia.
+ */
+@media (max-width: 900px){
+  .lang{
+    min-width:44px !important;min-height:44px !important;padding:0 6px !important;
+    display:inline-flex !important;align-items:center;justify-content:center;
+    font-size:12px !important;
+  }
+  .ham{min-width:44px !important;min-height:44px !important;
+    align-items:center;justify-content:center}
+  .marka,.logo,.znak,.szyld-marka,.tytul-marki,.nazwa{
+    min-height:44px !important;display:flex !important;align-items:center}
+
+  /* Wersaliki z dużym rozstrzeleniem poniżej 12 px są na telefonie
+     nieczytelne, niezależnie od tego, jak dobrze wyglądają na monitorze. */
+  .nadtytul,.nadpis,.etyk,.etykieta,.etykietka,.plakietka,.tag,.mini,
+  .metryczka,.sygnatura,.kd-dzien,.chip-dzien,.dzis-etyk,.dzis-etykieta,
+  .sala-etyk,.para-etyk,.blok-tytul,.zaufanie-etyk,.numer,.numerek,
+  .fakt-etyk,.bilecik-nad,.pas-telefon-etyk,.kreda-czas,
+  figcaption,.kolo-czas,.chip-czas,.pigulka-czas,.kd-czas,.dzwon,
+  .kafel-czas,.zaufanie-pod,.fakt-pod,.os-czas,.wiersz-czas,
+  .lekarz-pwz,.opinia-zrodlo,.reszta-tygodnia,.sala-dni,.sala-czas{
+    font-size:12px !important;
+  }
+
+  /* Długie numery i nazwy ulic nie mogą rozpychać strony w bok. */
+  .tel-link,.tel-duzy,.numer-duzy,.wielki-nr,.duzy-tel,.duzy-numer,
+  .telefon,.numer-xl,.bilecik-numer,.tel,.adr-wielki,.ulica{
+    overflow-wrap:anywhere;
+  }
+}
+
+/* Karta dań na 360 px: nazwa dania i cena stały w jednym wierszu i przy
+   dłuższych ukraińskich nazwach rozpychały stronę w bok. Na wąskim ekranie
+   cena schodzi pod nazwę. */
+@media (max-width:420px){
+  .karta .pozycja,.karta article{display:block}
+  .karta .cena,.pozycja .cena{display:block;margin-top:4px;white-space:normal}
+}
+
+
+/* ============================ TELEFON: reszta celów i etykiet
+ * Trzecia tura po pomiarze scripts/mobile.mjs. Patrz komentarz w tmp/mobile-3.mjs.
+ */
+@media (max-width: 900px){
+  /* Etykiety i nagłówki tabel: max() nigdy nie zmniejsza, tylko podnosi
+     te, które siedziały poniżej progu. */
+  th,td,dt,label,legend,small,
+  .kol-czas,.kol-cena,.kol-zakres,.poz-nr,.poz-cena,.metka,.cennik,
+  .usluga-cena,.grupa-razy,.skladka li,.dostawa-cena{
+    font-size:max(12px,.8rem);
+  }
+
+  /* Cele dotykowe: telefon w pasku, przyciski, kafelki godzin w kreatorze,
+     rozwijane pytania. Wszystko, co się naciska palcem. */
+  a[href^="tel:"],.btn,.guzik,.klaw,.klawisz,.pig,.pigula,.ramka,.obwodka,
+  .linia,.nr,.tel-link,.tel-btn,.tel-pigula,.dzwon,.telefon-gora,.link-strzalka,
+  .godzina,.dzien,.zakladka,summary{
+    min-height:44px;display:inline-flex;align-items:center;justify-content:center;
+  }
+  /* Rozwijane pytania i zakładki są blokowe — wyrównanie do lewej,
+     inaczej tekst wskoczyłby na środek. */
+  summary,.zakladka{justify-content:flex-start}
+
+  /* iOS przybliża stronę przy dotknięciu pola mniejszego niż 16 px.
+     To zachowanie Safari, nie preferencja — jedyne wyjście to 16 px. */
+  input,select,textarea{font-size:16px;min-height:44px}
+  textarea{min-height:80px}
+}
+
+
+/* ================== TELEFON: ostatnie drobiazgi
+ * Dokładne miejsca z tmp/male-teksty.mjs: ceny w cennikach, podpisy przycisków,
+ * numer w pasku i dopisek w logotypie. Wszystko poniżej 12 px na 390 px.
+ * Gola s ma pod znakiem napis EST. KIELCE ustawiony na 9 px — na monitorze
+ * to elegancki detal, w ręce nieczytelna plamka. */
+@media (max-width:900px){
+  .wielka-pigula span,.telefon-gora,.cena-bukietu,.lista-cena,
+  .znak-n,.znak-r,.tydzien summary,.ramka,.bilecik-guziki .ramka,
+  .marka-pod,.hero-adres,.grupa-razy,.cennik,.metka{font-size:12px !important}
+}
+
+
+/* ================== TELEFON: budżet paska nagłówka
+ * Patrz komentarz w tmp/mobile-4.mjs — to jest naprawa regresji, którą sam
+ * wprowadziłem, podnosząc cele dotykowe bez sprawdzenia szerokości paska.
+ */
+@media (max-width: 900px){
+  .belka,.nav,.naglowek-strony,.szyld,.pas-gorny,.listwa,.top-bar,.gora{
+    flex-wrap:nowrap;
+  }
+  /* Marka może się skrócić wielokropkiem; reszta paska nie może zniknąć. */
+  .marka,.logo,.znak,.szyld-marka,.tytul-marki,.nazwa,.marka-nazwa{
+    min-width:44px;flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;
+  /* Nazwa firmy jest w pasku najwazniejsza — to po nia klient patrzy pierwszy.
+     Wczesniej przelacznik jezyka (3 x 44px) spychal ja do 44px i "Dentika"
+     pokazywala sie jako "De". Guziki jezyka zwezone; WYSOKOSC 44px zostaje,
+     bo to ona decyduje o trafianiu palcem, a 32px szerokosci i tak jest
+     powyzej progu 24px z WCAG 2.5.8. */
+  .jz .lang,.jezyk .lang,.jezyki .lang,.jez .lang{min-width:32px;padding-inline:4px}
+  }
+  .jz,.jezyk,.jezyki{flex:0 0 auto}
+
+  /* Nagłówki tabel: th przegrywa na specyficzności z .cennik thead th. */
+  th,td,.cennik th,.cennik td,.plan th,.plan td,
+  .godziny-tabela th,.godziny-tabela td{font-size:max(12px,.8rem) !important}
+}
+
+/* Poniżej 560 px przycisk CTA z paska ustępuje miejsca telefonowi i menu.
+   Ta sama akcja jest w menu pod hamburgerem i w treści strony, więc nic
+   nie ginie — a pasek przestaje wypychać stronę w bok. */
+@media (max-width: 560px){
+  .btn--belka,.btn--zloty.btn--belka,.btn--czerwony.btn--belka,
+  .btn--glowny.btn--belka,.btn--pelny-kolor.btn--belka{display:none !important}
+}
+
+
+/* ============ TELEFON: ostatnie etykiety i pasek dni
+ * .krok-etyk i podobne to klasy na <label>, wiec wygrywaja z regula na samym
+ * elemencie. Pasek dni w kreatorze rezerwacji ma sie PRZEWIJAC w bok,
+ * a nie rozpychac strone — min-width:0 przywraca przycinanie. */
+@media (max-width:900px){
+  label,legend,.krok-etyk,.znacznik,.wyroznik,.pole-grupa label,
+  .zapis-form label,.wizyta-form label,.zam-form label,.rez-pole label{
+    font-size:max(12px,.78rem) !important;
+  }
+  .dni,#dni,.godziny,#godziny{min-width:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .kreator,.kreator .krok{min-width:0}
+}
+
+
+@media (max-width:900px){
+  .skip{min-height:44px;display:inline-flex;align-items:center}
+}
+
+/* Godziny w siatce tygodnia leżą na ciemnym winie, a --tekst-cichy jest
+   dobrany pod jasne tło — dawał 2.79:1. Na winie potrzeba jasnego piasku. */
+.dzien-czas{color:#C9B8A8}
+.dzien-wiersz.dzis .dzien-czas{color:var(--zloto)}
+
+/* switcher w menu mobilnym */
+@media (max-width:560px){
+  header .jezyk{display:none}
+  .jezyk--mob{display:flex;gap:2px;padding:10px 0 2px}
+  .jezyk--mob .lang{min-width:44px;min-height:44px;display:inline-flex;
+    align-items:center;justify-content:center}
+}
+@media (min-width:561px){ .jezyk--mob{display:none} }
